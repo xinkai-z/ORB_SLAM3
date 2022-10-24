@@ -1,6 +1,12 @@
 # VIAM NOTES
 when downloading on a linux computer with rtk(not a pi) I had to remove brew from my PATH to get some dependencies to work. In addition I had to remove ncurses and libtiff from brew. added them back afterwards but there is 100% a more correct way to do this. Also need to change which version of some packages(like openCV) is being used in CMakeLists.txt
 
+
+## Run MONO SLAM
+```bash
+./mono_tum_vi "/home/xinkaiz/projects/ato_slam_dev/Vocabulary/ORBvoc.txt" "./TUM-VI.yaml" "/home/xinkaiz/Downloads/dataset-corridor4_512_16/mav0/cam0/data" "./TUM_TimeStamps/dataset-corridor4_512.txt" "TUM"
+```
+
 ## setup Pangolin (includes eigen)
 ```bash
 git clone --recursive https://github.com/stevenlovegrove/Pangolin.git

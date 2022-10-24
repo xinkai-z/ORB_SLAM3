@@ -4,7 +4,7 @@ cd Thirdparty/DBoW2
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j2
+make -j16
 
 cd ../../g2o
 
@@ -13,16 +13,16 @@ echo "Configuring and building Thirdparty/g2o ..."
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j2
+make -j16
 
-cd ../../Sophus
+# cd ../../Sophus
 
-echo "Configuring and building Thirdparty/Sophus ..."
+# echo "Configuring and building Thirdparty/Sophus ..."
 
-mkdir build
-cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j2
+# mkdir build
+# cd build
+# cmake .. -DCMAKE_BUILD_TYPE=Release
+# make -j16
 
 cd ../../../
 
@@ -37,4 +37,4 @@ mkdir bin
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j2
+make -j16

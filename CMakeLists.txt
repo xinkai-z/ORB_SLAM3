@@ -148,3 +148,23 @@ add_executable(viam_main_v1
         viam-main-dir/main_v1.cc)
 target_link_libraries(viam_main_v1 ${PROJECT_NAME})
 
+
+######################### Monocular examples ############################
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
+add_executable(mono_tum_vi
+        Examples/Monocular/mono_tum_vi.cc)
+target_link_libraries(mono_tum_vi ${PROJECT_NAME})
+
+######################## Racing examples ################################
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/ATO)
+
+#add_executable(racing
+#        Examples/Racing/racing.cc)
+add_executable(ATO_video
+        Examples/ATO/video.cpp)
+target_link_libraries(ATO_video ${PROJECT_NAME})
+
+add_executable(plotTrajectory Examples/ATO/plotTrajectory.cpp)
+target_link_libraries(plotTrajectory ${Pangolin_LIBRARIES})
+#########################################################################
+

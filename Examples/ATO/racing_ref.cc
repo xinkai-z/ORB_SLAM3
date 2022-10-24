@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     cout.precision(17);
 
     // Create SLAM system. It initializes all system threads and gets ready to process frames.
-    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,true, 0, file_name);
+    ORB_SLAM3::System SLAM(argv[1],argv[2],ORB_SLAM3::System::MONOCULAR,false, 0, file_name);
     float imageScale = SLAM.GetImageScale();
 
     double t_resize = 0.f;
@@ -190,75 +190,37 @@ int main(int argc, char **argv)
 
     }
 
-    // // cout << "ttrack_tot = " << ttrack_tot << std::endl;
-    // // Stop all threads
-    // SLAM.Shutdown();
-
-
-    // // Tracking time statistics
-
-    // // Save camera trajectory
-
-    // if (bFileName)
-    // {
-    //     const string kf_file =  "kf_" + string(argv[argc-1]) + ".txt";
-    //     const string f_file =  "f_" + string(argv[argc-1]) + ".txt";
-    //     SLAM.SaveTrajectoryEuRoC(f_file);
-    //     SLAM.SaveKeyFrameTrajectoryEuRoC(kf_file);
-    // }
-    // else
-    // {
-    //     SLAM.SaveTrajectoryEuRoC("CameraTrajectory.txt");
-    //     SLAM.SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.txt");
-    // }
-
-    // sort(vTimesTrack.begin(),vTimesTrack.end());
-    // float totaltime = 0;
-    // for(int ni=0; ni<nImages[0]; ni++)
-    // {
-    //     totaltime+=vTimesTrack[ni];
-    // }
-    // cout << "-------" << endl << endl;
-    // cout << "median tracking time: " << vTimesTrack[nImages[0]/2] << endl;
-    // cout << "mean tracking time: " << totaltime/proccIm << endl;
-
-    std::vector<ORB_SLAM3::MapPoint*> mapStuff = SLAM.GetAtlas()->GetCurrentMap()->GetAllMapPoints();
-        // Map* GetCurrentMap();
-        // mapStuff = SLAM.GetTrackedMapPoints();
-        cout << "Start to write PCD with datapoints: " << endl;
-        cout << mapStuff.size() << endl;
-        // std::cout << "# x,y,z" << std::endl;
-        string pathSaveFileName = "./";
-        pathSaveFileName = pathSaveFileName.append(file_name);
-        pathSaveFileName.append(".pcd");
-        std::remove(pathSaveFileName.c_str());
-        std::ofstream ofs(pathSaveFileName, std::ios::binary);
-        // boost::archive::text_oarchive oa(ofs);
-        ofs  << "VERSION .7\n"
-            << "FIELDS x y z\n"
-            << "SIZE 4 4 4\n"
-            << "TYPE F F F\n"
-            << "COUNT 1 1 1\n"
-            << "WIDTH "
-            << mapStuff.size()
-            << "\n"
-            << "HEIGHT " << 1 << "\n"
-            << "VIEWPOINT 0 0 0 1 0 0 0\n"
-            << "POINTS "
-            << mapStuff.size()
-            << "\n"
-            << "DATA ascii\n";
-	for (auto p : mapStuff) {
-		Eigen::Matrix<float, 3, 1> v = p->GetWorldPos();//ORB_SLAM3::Converter::toVector3d(p->GetWorldPos());
-		// std::cout << v.x() << "," << v.y() << "," << v.z() << std::endl;
-        ofs << v.x()  << " " << v.y()  << " " << v.z()  << "\n";
-	}
-    ofs.close();
-    cout << "End to write PCD" << endl;
+    // cout << "ttrack_tot = " << ttrack_tot << std::endl;
+    // Stop all threads
     SLAM.Shutdown();
-    SLAM.SaveTrajectoryEuRoC("CameraTrajectory.txt");
-    SLAM.SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.txt");
-    cout << "Yo Shutting" << endl;
+
+
+    // Tracking time statistics
+
+    // Save camera trajectory
+
+    if (bFileName)
+    {
+        const string kf_file =  "kf_" + string(argv[argc-1]) + ".txt";
+        const string f_file =  "f_" + string(argv[argc-1]) + ".txt";
+        SLAM.SaveTrajectoryEuRoC(f_file);
+        SLAM.SaveKeyFrameTrajectoryEuRoC(kf_file);
+    }
+    else
+    {
+        SLAM.SaveTrajectoryEuRoC("CameraTrajectory.txt");
+        SLAM.SaveKeyFrameTrajectoryEuRoC("KeyFrameTrajectory.txt");
+    }
+
+    sort(vTimesTrack.begin(),vTimesTrack.end());
+    float totaltime = 0;
+    for(int ni=0; ni<nImages[0]; ni++)
+    {
+        totaltime+=vTimesTrack[ni];
+    }
+    cout << "-------" << endl << endl;
+    cout << "median tracking time: " << vTimesTrack[nImages[0]/2] << endl;
+    cout << "mean tracking time: " << totaltime/proccIm << endl;
 
 
     return 0;

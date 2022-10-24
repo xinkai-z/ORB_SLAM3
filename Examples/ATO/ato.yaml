@@ -8,23 +8,23 @@ File.version: "1.0"
 Camera.type: "KannalaBrandt8"
 
 # Camera calibration and distortion parameters (OpenCV) 
-Camera1.fx: 190.978477
-Camera1.fy: 190.973307
-Camera1.cx: 254.931706
-Camera1.cy: 256.897442
+Camera1.fx: 359.5834086100726
+Camera1.fy: 358.3708692926856
+Camera1.cx: 320.16751786158125
+Camera1.cy: 193.29508466209566
 
 # Equidistant distortion 0.0034823894022493434, 0.0007150348452162257, -0.0020532361418706202, 0.00020293673591811182
-Camera1.k1: 0.003482389402
-Camera1.k2: 0.000715034845
-Camera1.k3: -0.002053236141
-Camera1.k4: 0.000202936736
+Camera1.k1: -0.053849529847988714
+Camera1.k2: 0.06455119230197887
+Camera1.k3: -0.10332527966984534
+Camera1.k4: 0.05652063749084572
     
 # Camera resolution
-Camera.width: 512
-Camera.height: 512
+Camera.width: 640
+Camera.height: 360
 
 # Camera frames per second 
-Camera.fps: 20
+Camera.fps: 100
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
 Camera.RGB: 1
@@ -63,7 +63,7 @@ Viewer.ViewpointY: -0.7
 Viewer.ViewpointZ: -3.5
 Viewer.ViewpointF: 500.0
 
+
 # File directory
-# System.SaveAtlasToFile: "/home/xinkaiz/projects/slam_ref/ORB_SLAM3/Examples/Monocular/maps/atlas"
 # System.SaveAtlasToFile: "map"
 System.LoadAtlasFromFile: "map"
